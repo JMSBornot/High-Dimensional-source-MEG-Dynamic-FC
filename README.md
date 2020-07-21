@@ -6,7 +6,22 @@ NOTE: Our tools require that users setup the OHBA software library accordingly t
 
 Keep tuned! We will make available a friendly GUI in a future research work!
 
-CODE 
+CODE **** CPSpipe01_preprocessing.m - data preprocessing ****
+
+CODE **** run_dataset.m ****
+
+This small script starts the parallel cluster and runs the initial MATLAB parallel (parfor) code in a HPC cluster. Exactly, it runs these two scripts:
+- CPSpipe02_blockwise_FCandSTAT.m
+- CPSpipe03_blockwise_assemble.m
+
+CODE **** CPSpipe02_blockwise_FCandSTAT.m - blockwise functional connectivity (FC) and statistical (Wilcoxon sign-rank) statistical analysis ****
+
+This function performs bivariate FC analysis using an imaginary coherence index. Instead of directly estimating the 16403 x 16403 connectivity matrix, it performs this computation blockwise. Simultaneously, it performs statistical analysis of the post-stimulus estimated dynamic FC values versus corresponding baseline samples. It also apply thresholding to select outstanding features according to predetermined suprathreshold p-values in the range from 10^-9 to 10^-5.
+
+CODE **** CPSpipe03_blockwise_assemble.m - assemble the blockwise FC indices from the block subspace to the full-space of 16403 x 16403 FC indices  ****
+
+This function only performs the assembling of the highly-sparse selected suprathreshold connections.
+
 CODE **** scADSpain_preproc_parfor.m - data preprocessing ****
 
 1. Read the ELEKTA-Neuromag "fif" file and read it using SPM toobox, which generates an object containing the data.
